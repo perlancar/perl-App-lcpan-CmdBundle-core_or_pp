@@ -79,6 +79,7 @@ sub handle_cmd {
         my $subject = "$mod".($v ? " (version $v)" : "");
         $log->tracef("Checking %s ...", $subject);
         if ($core) {
+            $what //= "core";
             if (!Module::CoreList::More->is_still_core($mod, $v)) {
                 push @errs, "$subject is not core";
             }
@@ -88,7 +89,7 @@ sub handle_cmd {
                 push @errs, "$subject is not installed, so can't check XS/PP";
                 # XXX check installed module version
             } elsif (!Module::XSOrPP::is_pp($mod)) {
-                push @errs, "$subject is not PP";
+                push @errs, "$subject is not $what";
             }
         } else {
             $what //= "core/PP";
@@ -98,7 +99,7 @@ sub handle_cmd {
                 push @errs, "$subject is not installed, so can't check XS/PP";
                 # XXX check installed module version
             } elsif (!Module::XSOrPP::is_pp($mod)) {
-                push @errs, "$subject is not PP";
+                push @errs, "$subject is not $what";
             }
         }
     }
