@@ -1,5 +1,12 @@
 Revision history for App-lcpan-CmdBundle-core_or_pp
 
+0.02    2016-03-09 (PERLANCAR)
+
+	- No functional changes.
+
+	- [Bugfix] Fix messages.
+
+
 0.01    2016-03-09 (PERLANCAR)
 
         - First release.
