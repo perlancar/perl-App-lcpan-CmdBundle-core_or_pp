@@ -28,9 +28,9 @@ Install this distribution, then the lcpan subcommands below will be available:
 
 =head1 DESCRIPTION
 
-Checking that a module with its (recursive) (runtime requires) prereqs are all
-core/PP. Doing this check is useful when we want to fatpack said module along
-with its prereqs.
+The subcommand C<core-or-pp> checks that a module with its (recursive) (runtime
+requires) prereqs are all core/PP. Doing this check is useful when we want to
+fatpack said module along with its prereqs.
 
 
 =head1 SEE ALSO
