@@ -6,7 +6,7 @@ package App::lcpan::Cmd::core_or_pp;
 use 5.010001;
 use strict;
 use warnings;
-use Log::Any::IfLOG '$log';
+use Log::ger;
 
 require App::lcpan;
 
@@ -77,7 +77,7 @@ sub handle_cmd {
         next if $mod eq 'perl'; # XXX check perl version
         my $v = $mods->{version};
         my $subject = "$mod".($v ? " (version $v)" : "");
-        $log->tracef("Checking %s ...", $subject);
+        log_trace("Checking %s ...", $subject);
         if ($core) {
             $what //= "core";
             if (!Module::CoreList::More->is_still_core($mod, $v)) {
