@@ -53,17 +53,33 @@ sub handle_cmd {
     my $core       = delete $args{core};
     my $pp         = delete $args{pp};
     my $core_or_pp = delete($args{core_or_pp}) // 1;
+    my $mods0      = delete $args{modules};
 
     my $mods = {};
     if ($with_prereqs || $with_recursive_prereqs) {
-        my $res = App::lcpan::deps(
+        require App::lcpan::Cmd::mod2dist;
+
+        my $res;
+        $res = App::lcpan::Cmd::mod2dist::handle_cmd(%args, modules=>$mods0);
+        #log_trace "mod2dist result: %s", $res;
+        return [500, "Can't mod2dist: $res->[0] - $res->[1]"]
+            unless $res->[0] == 200;
+        my $dists = ref($res->[2]) eq 'HASH' ? [sort keys %{$res->[2]}] : [$res->[2]];
+        #log_trace "dists=%s", $dists;
+
+        $res = App::lcpan::deps(
             %args,
+            dists => $dists,
             (level => -1) x !!$with_recursive_prereqs,
         );
-        return $res unless $res->[0] == 200;
+        return [500, "Can't deps: $res->[0] - $res->[1]"]
+            unless $res->[0] == 200;
+
         for my $e (@{ $res->[2] }) {
             $e->{module} =~ s/^\s+//;
             $mods->{$e->{module}} = $e->{version};
+            #log_trace "Added %s (%s) to list of modules to check",
+            #    $e->{module}, $e->{version};
         }
         $mods->{$_} //= 0 for @{ $args{modules} };
     } else {
