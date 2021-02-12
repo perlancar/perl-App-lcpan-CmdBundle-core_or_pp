@@ -81,9 +81,9 @@ sub handle_cmd {
             #log_trace "Added %s (%s) to list of modules to check",
             #    $e->{module}, $e->{version};
         }
-        $mods->{$_} //= 0 for @{ $args{modules} };
+        $mods->{$_} //= 0 for @$mods0;
     } else {
-        $mods->{$_} = 0 for @{ $args{modules} };
+        $mods->{$_} = 0 for @$mods0;
     }
 
     my $what;
