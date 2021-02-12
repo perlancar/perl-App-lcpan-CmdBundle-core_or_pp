@@ -1,3 +1,10 @@
+0.050   2021-02-13  Released-By: PERLANCAR; Urgency: medium
+
+	- [bugfixes] Fix --with-prereqs and --with-recursive-prereqs due to
+	  bug in passing arguments to deps() (the function accepts 'dists',
+	  not 'modules').
+
+
 0.04    2017-07-10  Released-By: PERLANCAR
 
 	- No functional changes.
