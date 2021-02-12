@@ -1,4 +1,9 @@
-0.050   2021-02-13  Released-By: PERLANCAR; Urgency: medium
+0.051   2021-02-13  Released-By: PERLANCAR; Urgency: medium
+
+	- [bugfix] Derp, fix regression bug caused by previous commit.
+
+
+0.050   2021-02-13  Released-By: PERLANCAR; Urgency: medium; Broken: yes
 
 	- [bugfixes] Fix --with-prereqs and --with-recursive-prereqs due to
 	  bug in passing arguments to deps() (the function accepts 'dists',
